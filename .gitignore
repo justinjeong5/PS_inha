@@ -205,3 +205,5 @@ Temporary Items
 "9\354\243\274\354\260\250/"
 CMakeLists.txt
 template.cpp
+*.mov
+*.pptx
