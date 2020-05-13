@@ -3,29 +3,37 @@ problem solving Inha Univ. 2020 spring
 
 ## <1주차>
 ### 1.1 DNA 대표서열
-* <a href="https://leetcode.com/problems/sliding-window-median/">Leetcode - 480. Sliding Window Median</a>  
-* <a href="https://www.acmicpc.net/problem/1572">백준 - 1572. 중앙값</a> 
+* <a href="https://leetcode.com/problems/sliding-window-median/">Leetcode - 480. Sliding Window Median (유사문제)</a>  
+* <a href="https://www.acmicpc.net/problem/1572">백준 - 1572. 중앙값 (유사문제)</a> 
 
 최소편집거리 알고리즘 (minimum edit distance algorithm)  
 주어진 문자열의 최소편집거리의 합을 구하고, 모든 문자열의 편집거리가 최소인 문자열을 구하는 문제  
 
   
 ### 1.2 과소비 알림 서비스
-* <a href="https://leetcode.com/problems/edit-distance/">Leetcode - 72. Edit Distance</a>  
-* <a href="https://www.acmicpc.net/problem/3449">백준 - 3449. 해밍 거리</a>  
-* <a href="https://www.acmicpc.net/problem/7620">백준 - 7620. 편집 거리</a>  
+* <a href="https://leetcode.com/problems/edit-distance/">Leetcode - 72. Edit Distance  (유사문제)</a>  
+* <a href="https://www.acmicpc.net/problem/3449">백준 - 3449. 해밍 거리 (유사문제)</a>  
+* <a href="https://www.acmicpc.net/problem/7620">백준 - 7620. 편집 거리 (유사문제)</a>  
 
-슬라이딩 윈도우 알고리즘 (sliding window)
+슬라이딩 윈도우 알고리즘 (sliding window)  
 슬라이딩 윈도우 방식을 이용하여 k개의 연속된 구간에서의 중간값을 구하는 문제
- 
  
 
 ## <2주차>
-오류정정 - 편집거리/해밍거리
-	해밍거리 - (백준/유사)
-	편집거리 - (백준/유사)
-오목 - 구현
-    오목 - (백준/유사)
+### 2.1 오류정정
+* <a href="https://leetcode.com/problems/edit-distance/">Leetcode - 72. Edit Distance  (유사문제)</a>  
+* <a href="https://www.acmicpc.net/problem/3449">백준 - 3449. 해밍 거리 (유사문제)</a>  
+* <a href="https://www.acmicpc.net/problem/7620">백준 - 7620. 편집 거리 (유사문제)</a>  
+
+최소편집거리 알고리즘 (minimum edit distance algorithm)  
+주어진 문자열의 최소편집거리를 이용하여, 원래 문자열이 무엇이었는지 알아내는 문제  
+
+### 2.2 오목  
+* <a href="https://www.acmicpc.net/problem/2615">백준 - 2615. 오목 (유사문제)</a>     
+
+탐색 BFS, DFS  
+탐색을 이용하여 5개의 연속된 돌이 놓이는지를 확인하는 문제  
+
 
 ## <3주차>
 게임개발계획 - hashing
