@@ -137,13 +137,35 @@ BFS와 해시맵을 이용한 최단 경로 탐색문제
 
 
 ## <7주차>
-배수 - string
-연산자 - 중위표기법
-        연산자 끼워넣기 - (백준/유사)
+<a href="https://www.youtube.com/watch?v=8x3SKQr-O9k&t=266s"> 직접 찍은 해설 영상 - 배수 </a>
+
+### 7.1 배수
+* <a href="https://leetcode.com/problems/add-strings/">Leetcode - 415. Add Strings (유사문제)</a> 
+* <a href="https://leetcode.com/problems/multiply-strings/">Leetcode - 43. Multiply Strings (유사문제)</a> 
+
+Implement for string division  
+두 수가 정수형의 크기를 넘는 문자열 자료형의 숫자일때 두 수가 배수관계인지 구하는 문제  
+
+	입력된 두 문자열의 길이를 각각 N, M이라 할때
+	시간복잡도: O(max(N, M))
+	공간복잡도: O(N + M)
+
+### 7.2 연산자
+
+문자열로 주어진 수식을 계산하는 문제
+이론적으로는 tree를 이용하여 식을 표현하고
+코드로는 stack을 이용하여 중위표기식을 후위표기식으로 바꾸어 푸는 문제로 유명하다.
+
+* <a href="https://www.acmicpc.net/problem/14888">백준 - 14888. 연산자 끼워넣기 (유사문제)</a> 
+* <a href="https://www.acmicpc.net/problem/1918">백준 - 1918. 중위표기식 (유사문제)</a>  
+* <a href="https://www.acmicpc.net/problem/1935">백준 - 1935. 중위표기식2 (유사문제)</a> 
+
 
 ## <8주차>
 수열 조합하기 - permutation
 계획 쇼핑의 제왕 - greedy algorithm
 
 ## <9주차>
+
+<a href="https://www.youtube.com/watch?v=7mpi-VAfFIw&t=335s"> 직접 찍은 해설 영상 - LCS</a>
 
