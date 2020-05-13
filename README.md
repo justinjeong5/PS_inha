@@ -1,5 +1,5 @@
 # PS_inha
-problem solving Inha Univ. 2020 spring
+problem solving Inha Univ. 2020 spring  
 
 ## <1주차>
 ### 1.1 DNA 대표서열
@@ -114,19 +114,36 @@ BFS를 이용한 최단 경로 탐색문제
 	시간복잡도: O(N^2)
 	공간복잡도: O(N^2)
 	
-<6주차>
-회문 판별 - palindrome(string)
-        Valid Palindrome - (릿코드/동일)
-미로 저택 - dfs/bfs + 구현
+## <6주차>
 
-<7주차>
+### 6.1 회문 판별
+
+* <a href="https://leetcode.com/problems/valid-palindrome/">Leetcode - 125. Valid Palindrome (동일문제)</a> 
+
+two pointers  
+주어진 문자열이 숫자, 특수문자를 제외하고 회문인지 확인하는 문제
+
+	입력의 크기를 N이라 할때
+	시간복잡도: O(N)
+	공간복잡도: O(1)
+
+### 6.2 미로 저택
+BFS와 해시맵을 이용한 최단 경로 탐색문제
+최단경로를 찾는 문제이다.  
+
+	입력의 크기를 각각 N: 가로, M: 세로라고 하면
+	시간복잡도: O(NM)
+	공간복잡도: O(NM)
+
+
+## <7주차>
 배수 - string
 연산자 - 중위표기법
         연산자 끼워넣기 - (백준/유사)
 
-<8주차>
+## <8주차>
 수열 조합하기 - permutation
 계획 쇼핑의 제왕 - greedy algorithm
 
-<9주차>
+## <9주차>
 
