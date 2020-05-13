@@ -63,8 +63,29 @@ problem solving Inha Univ. 2020 spring
 
 
 ## <4주차>
-움직이는 하노이탑 - 탐색 priority queue/hash map
-	무지의 먹방 라이브 - (프로그래머스/유사)
+### 4.1 움직이는 하노이탑(solved)
+
+* <a href="https://programmers.co.kr/learn/courses/30/lessons/42891">프로그래머스 - 42891. 무지의 먹방 라이브 (유사문제)</a> 
+
+원형 배열(circular qrray)  
+원형 배열의 개념이 포함된 문제  
+
+	입력의 크기를 N이라 할때
+	시간복잡도: O(N^2)
+	공간복잡도: O(N)
+
+### 4.2 움직이는 하노이탑(solved)
+
+* <a href="https://programmers.co.kr/learn/courses/30/lessons/42891">프로그래머스 - 42891. 무지의 먹방 라이브 (유사문제)</a> 
+
+앞선 4.1번의 문제에서 입력의 크기가 매우 커진 형태이다.  
+따라서 O(N^2)의 속도로는 풀리지 않는다  
+해시맵을 사용하여 탐색 단계에서의 속도를 O(1)으로 하여 속도를 빠르게 하였다.  
+
+	입력의 크기를 N이라 할때
+	시간복잡도: O(N)
+	공간복잡도: O(N)
+
 
 ## <5주차>
 팀원 구하기 - 사이클 탐지
