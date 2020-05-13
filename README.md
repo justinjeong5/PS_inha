@@ -204,7 +204,7 @@ cache정보를 이용하여 미리 계산해둔 문자열간의 유사도를 기
 	공간복잡도: O(NM)
 
 * <a href="https://www.youtube.com/watch?v=7mpi-VAfFIw&t=335s"> 직접 찍은 해설 영상 - LCS</a>  
-* <a href="https://leetcode.com/problems/longest-common-subsequence/">Leetcode - 121. Best Time to Buy and Sell Stock (동일문제)</a>  
+* <a href="https://leetcode.com/problems/longest-common-subsequence/">Leetcode - 1143. Longest Common Subsequence (동일문제)</a>  
   
 ## <10주차>
 
