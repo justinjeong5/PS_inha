@@ -1,5 +1,5 @@
 # PS_inha
-problem solving Inha Univ. 2020 spring  
+problem solving Inha Univ. 2020 spring
 
 ## <1주차>
 ### 1.1 DNA 대표서열
@@ -88,7 +88,7 @@ problem solving Inha Univ. 2020 spring
 
 
 ## <5주차>
-### 5.1 팀원 구하기
+### 5.1 팀원 구하기(solved)
 
 * <a href="https://www.acmicpc.net/problem/9466">백준 - 9466. 텀 프로젝트 (동일문제)</a> 
 
@@ -102,7 +102,7 @@ problem solving Inha Univ. 2020 spring
 
 	공간복잡도: O(1)
 
-### 5.2 말의 이동
+### 5.2 말의 이동(solved)
 
 * <a href="https://www.acmicpc.net/problem/7562">백준 - 7562. 나이트의 이동 (동일문제)</a> 
 
@@ -116,7 +116,7 @@ BFS를 이용한 최단 경로 탐색문제
 	
 ## <6주차>
 
-### 6.1 회문 판별
+### 6.1 회문 판별(solved)
 
 * <a href="https://leetcode.com/problems/valid-palindrome/">Leetcode - 125. Valid Palindrome (동일문제)</a> 
 
@@ -138,7 +138,7 @@ BFS와 해시맵을 이용한 최단 경로 탐색문제
 
 ## <7주차>
 
-### 7.1 배수
+### 7.1 배수(solved)
 * <a href="https://www.youtube.com/watch?v=8x3SKQr-O9k&t=266s"> 직접 찍은 해설 영상 - 배수 </a>
 * <a href="https://leetcode.com/problems/add-strings/">Leetcode - 415. Add Strings (유사문제)</a> 
 * <a href="https://leetcode.com/problems/multiply-strings/">Leetcode - 43. Multiply Strings (유사문제)</a> 
@@ -163,7 +163,7 @@ Implement for string division
 
 ## <8주차>
 
-### 8.1 수열 조합하기
+### 8.1 수열 조합하기(solved)
 
 순열 permutation  
 주어진 배열의 순열 조합을 통해 주어진 범위 안에 있는 경우를 세는 문제  
@@ -182,7 +182,7 @@ Implement for string division
 
 ## <9주차>
 
-### 9.1 온라인 정렬  
+### 9.1 온라인 정렬(solved) 
 
 우선순위 큐 priority queue  
 주어진 배열 내에서 증가하는 구간을 찾아 값을 누적하는 문제
@@ -193,7 +193,7 @@ Implement for string division
 
 * <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">Leetcode - 121. Best Time to Buy and Sell Stock (유사문제)</a>  
 
-### 9.2 Longest Common Subsequence
+### 9.2 Longest Common Subsequence(solved)
 
 동적계획법 Dynamic programming  
 cache정보를 이용하여 미리 계산해둔 문자열간의 유사도를 기반으로  
@@ -206,5 +206,30 @@ cache정보를 이용하여 미리 계산해둔 문자열간의 유사도를 기
 * <a href="https://www.youtube.com/watch?v=7mpi-VAfFIw&t=335s"> 직접 찍은 해설 영상 - LCS</a>  
 * <a href="https://leetcode.com/problems/longest-common-subsequence/">Leetcode - 121. Best Time to Buy and Sell Stock (동일문제)</a>  
   
+## <10주차>
 
-  
+### 10.1 배낭싸기(solved)
+
+탐욕법 greedy algorithm  
+NP-complete 분야에서 매우 유명한 문제중 하나인 knapsack을 변형한 문제  
+
+	입력된 내용중 물건의 종류를 T라고 할때
+	시간복잡도: O(T logT)
+	공간복잡도: O(1)
+
+* <a href="https://www.acmicpc.net/problem/12865">백준 - 12865. 평범한 배낭 (유사문제)</a>
+
+### 10.2 배낭싸기(solved)
+
+동적계획법 Dynamic programming  
+NP-complete 분야에서 매우 유명한 문제중 하나인 knapsack을 변형한 문제  
+cache정보를 이용하여 미리 계산해둔 값을 기반으로 다음 값을 추적한다  
+
+	입력된 내용중 물건의 종류를 T, 무게의 최대치를 W라고 할때
+	시간복잡도: O(TW)
+	공간복잡도: O(W)
+	
+* <a href="https://www.acmicpc.net/problem/12865">백준 - 12865. 평범한 배낭 (동일문제)</a>
+
+
+-EOF-
