@@ -182,7 +182,29 @@ Implement for string division
 
 ## <9주차>
 
+### 9.1 온라인 정렬  
+
+우선순위 큐 priority queue  
+주어진 배열 내에서 증가하는 구간을 찾아 값을 누적하는 문제
+
+	입력된 배열의 길이를 N이라 할때
+	시간복잡도: O(N)
+	공간복잡도: O(1)
+
+* <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">Leetcode - 121. Best Time to Buy and Sell Stock (유사문제)</a>  
+
+### 9.2 Longest Common Subsequence
+
+동적계획법 Dynamic programming  
+cache정보를 이용하여 미리 계산해둔 문자열간의 유사도를 기반으로  
+다음 문자열에 대한 유사도를 구하는 문제이다.
+
+	입력된 두 문자열의 길이를 각각 N, M이라 할때  
+	시간복잡도: O(NM)
+	공간복잡도: O(NM)
+
 * <a href="https://www.youtube.com/watch?v=7mpi-VAfFIw&t=335s"> 직접 찍은 해설 영상 - LCS</a>  
+* <a href="https://leetcode.com/problems/longest-common-subsequence/">Leetcode - 121. Best Time to Buy and Sell Stock (동일문제)</a>  
+  
 
-
-
+  
