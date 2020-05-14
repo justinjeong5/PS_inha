@@ -56,8 +56,7 @@ int main() {
     while (test_case-- != 0) {
         cin >> input_size;
         for (int input_idx = 1; input_idx <= input_size; ++input_idx) {
-            cin >> dst;
-            um[input_idx] = dst;
+            cin >> um[input_idx];
         }
         solution();
     }

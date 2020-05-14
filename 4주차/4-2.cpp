@@ -51,10 +51,8 @@ int main() {
         preprocess();
 
         for (int input_index = 0; input_index < input_siz; ++input_index) {
-            cin >> temp;
-            nums[input_index] = temp;
+            cin >> nums[input_index];
         }
-
         solution();
     }
     return 0;

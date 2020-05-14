@@ -14,14 +14,25 @@ using namespace std;
 
 int amount_origin, length_origin;
 int length_problem;
+int min_distance, target_idx;
 string target;
 vector<string> origin;
 
-void print_letter(int target_idx) {
-    char ans = 'A' + target_idx;
-    cout << ans;
+void resize_input(int amount_origin){
+	origin.resize(amount_origin, "");
 }
 
+void print_letter(int target_idx) {
+    char ans = 'A' + target_idx;
+    cout << ans << '\n';
+}
+
+void update_distance(int distance, int pattern){
+	if (min_distance > distance) {
+        min_distance = distance;
+        target_idx = pattern;
+    }
+}
 
 int get_hamming_distance(string &text, string &target) {
     int distance = 0;
@@ -35,18 +46,13 @@ int get_hamming_distance(string &text, string &target) {
 void solution() {
     const int len = length_problem / length_origin;
     for (int index = 0; index < len; index++) {
-        int min_distance = INT_MAX, target_idx = 0;
-
+        min_distance = INT_MAX, target_idx = 0;
         for (int pattern = 0; pattern < amount_origin; ++pattern) {
             string tar = target.substr(index * length_origin, length_origin);
             int temp = get_hamming_distance(origin[pattern], tar);
-            if (min_distance > temp) {
-                min_distance = temp;
-                target_idx = pattern;
-            }
+            update_distance(temp, pattern);
         }
         print_letter(target_idx);
-
     }
 }
 
@@ -57,21 +63,15 @@ int main() {
 
     int test_case;
     cin >> test_case;
-    for (int test = 0; test < test_case; ++test) {
+    while(test_case-- != 0) {
         cin >> amount_origin >> length_origin;
-        origin.resize(amount_origin, "");
+        resize_input(amount_origin);
         for (int input = 0; input < amount_origin; ++input) {
-            string input_text;
-            cin >> input_text;
-            origin[input] = input_text;
+            cin >> origin[input];
         }
         cin >> length_problem >> target;
-
         solution();
-        cout << '\n';
     }
-
-
     return 0;
 }
 /*

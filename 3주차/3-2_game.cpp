@@ -30,6 +30,12 @@ bool cmp(pair<string, pair<int, int>> &a, pair<string, pair<int, int>> &b) {
     }
 }
 
+void update_answer(int cur, int index){
+    if (cur > board[index].second.first) return;
+    cur = board[index].second.second;
+    answer++;
+}
+
 void print_answer() {
     cout << answer << '\n';
 }
@@ -39,9 +45,7 @@ void solution() {
 
     int cur = board[0].second.second;
     for (int index = 1; index < input_length; ++index) {
-        if (cur > board[index].second.first) continue;
-        cur = board[index].second.second;
-        answer++;
+        update_answer(cur, index);
     }
     print_answer();
 }
@@ -57,10 +61,7 @@ int main() {
         cin >> input_length;
         resize_input();
         for (int input = 0; input < input_length; ++input) {
-            string name;
-            int src, dst;
-            cin >> name >> src >> dst;
-            board[input] = {name, {src, dst}};
+            cin >> board[input].first >> board[input].second.first >> board[input].second.second;
         }
         solution();
     }

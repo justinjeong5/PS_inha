@@ -42,17 +42,14 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
+
     cin >> test_case_amount;
     while (test_case_amount-- != 0) {
         cin >> input_siz;
         preprocess();
-
         for (int input_index = 0; input_index < input_siz; ++input_index) {
-            int temp;
-            cin >> temp;
-            nums[input_index] = temp;
+            cin >> nums[input_index];
         }
-
         solution();
     }
     return 0;
