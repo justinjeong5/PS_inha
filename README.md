@@ -1,7 +1,7 @@
 # PS_inha
 Problem Solving Inha Univ. 2020 spring  
 
-collaborator: [ellyheetov](https://github.com/ellyheetov)
+collaborator: [ellyheetov](https://github.com/ellyheetov)  
 
 ## <1주차>
 ### 1.1  [DNA 대표서열](https://github.com/justinjeong5/PS_inha/blob/master/1%EC%A3%BC%EC%B0%A8/prob-DNA1-1.pdf)
@@ -35,6 +35,104 @@ collaborator: [ellyheetov](https://github.com/ellyheetov)
 최소편집거리 알고리즘 (minimum edit distance algorithm)  
 주어진 문자열의 최소편집거리를 이용하여, 원래 문자열이 무엇이었는지 알아내는 문제  
 
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.3.25.
+ *  INHA_problem_solving 2-1_error
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <utility>
+#include <climits>
+
+using namespace std;
+
+int amount_origin, length_origin;
+int length_problem;
+int min_distance, target_idx;
+string target;
+vector<string> origin;
+
+void resize_input(int amount_origin){
+	origin.resize(amount_origin, "");
+}
+
+void print_letter(int target_idx) {
+    char ans = 'A' + target_idx;
+    cout << ans << '\n';
+}
+
+void update_distance(int distance, int pattern){
+	if (min_distance > distance) {
+        min_distance = distance;
+        target_idx = pattern;
+    }
+}
+
+int get_hamming_distance(string &text, string &target) {
+    int distance = 0;
+    for (int index = 0; index < length_origin; ++index) {
+        if (text[index] == target[index]) continue;
+        distance++;
+    }
+    return distance;
+}
+
+void solution() {
+    const int len = length_problem / length_origin;
+    for (int index = 0; index < len; index++) {
+        min_distance = INT_MAX, target_idx = 0;
+        for (int pattern = 0; pattern < amount_origin; ++pattern) {
+            string tar = target.substr(index * length_origin, length_origin);
+            int temp = get_hamming_distance(origin[pattern], tar);
+            update_distance(temp, pattern);
+        }
+        print_letter(target_idx);
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+    while(test_case-- != 0) {
+        cin >> amount_origin >> length_origin;
+        resize_input(amount_origin);
+        for (int input = 0; input < amount_origin; ++input) {
+            cin >> origin[input];
+        }
+        cin >> length_problem >> target;
+        solution();
+    }
+    return 0;
+}
+/*
+2
+3 8
+00000000
+11111111
+01010101
+24 010000001111110101011101
+4 8
+00000011
+00001100
+00110000
+11000000
+16 1000000000000001
+ */
+```
+
+</details>
+
 	입력된 문자열의 개수를 T, 문자열의 길이를 N이라고 할때
 	시간복잡도: O(TN)
 	공간복잡도: O(N)
@@ -55,6 +153,107 @@ collaborator: [ellyheetov](https://github.com/ellyheetov)
 
 그리디 알고리즘 (Greedy algorithm)  
 그리디 알고리즘의 대표문제로 유명한 회의실 배정문제와 상당히 유사한 문제  
+
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.3.26.
+ *  INHA_problem_solving 3-2_game
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <utility>
+
+using namespace std;
+
+vector<pair<string, pair<int, int>>> board;
+// board = {name, {start, end}};
+int input_length = 0;
+int answer = 0;
+
+void resize_input() {
+    answer = 1;
+    board.resize(input_length, {"", {0, 0}});
+}
+
+bool cmp(pair<string, pair<int, int>> &a, pair<string, pair<int, int>> &b) {
+    if (a.second.second < b.second.second) return true;
+    else if (a.second.second > b.second.second) return false;
+    else if (a.second.second == b.second.second) {
+        return a.second.first < b.second.first;
+    }
+}
+
+void update_answer(int cur, int index){
+    if (cur > board[index].second.first) return;
+    cur = board[index].second.second;
+    answer++;
+}
+
+void print_answer() {
+    cout << answer << '\n';
+}
+
+void solution() {
+    sort(board.begin(), board.end(), cmp);
+
+    int cur = board[0].second.second;
+    for (int index = 1; index < input_length; ++index) {
+        update_answer(cur, index);
+    }
+    print_answer();
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+    for (int test = 0; test < test_case; ++test) {
+        cin >> input_length;
+        resize_input();
+        for (int input = 0; input < input_length; ++input) {
+            cin >> board[input].first >> board[input].second.first >> board[input].second.second;
+        }
+        solution();
+    }
+
+    return 0;
+}
+
+/*
+ 2
+11
+item1 5 7
+ item2 8 12
+ item3 0 6
+ item4 1 4
+ item5 6 10
+ item6 5 9
+ item7 3 9
+ item8 8 11
+ item9 2 14
+ item10 3 5
+ item11 12 16
+ 5
+apple 47 49
+ banana 35 47
+ grape 2 46
+ melon 7 19
+ orange 19 40
+ */
+```
+
+</details>
+
 
 	입력의 크기를 N이라 할때  
 	시간복잡도: O(N logN)
@@ -80,6 +279,79 @@ collaborator: [ellyheetov](https://github.com/ellyheetov)
 원형 배열(circular qrray)  
 원형 배열의 개념이 포함된 문제  
 
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.4.1.
+ *  INHA_problem_solving 4-1
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <utility>
+#include <climits>
+
+using namespace std;
+int test_case_amount, input_siz = 0;
+int answer = 0;
+
+vector<int> nums;
+
+void print_answer() {
+    cout << answer << '\n';
+}
+
+void solution() {
+    for (int out = 0; out < input_siz; ++out) {
+        int target = nums[out];
+        for (int in = out + 1; in < input_siz; ++in) {
+            if (target != nums[in] + 1) continue;
+            target--;
+        }
+        answer++;
+    }
+    print_answer();
+}
+
+void preprocess() {
+    nums.resize(input_siz, 0);
+    answer = 0;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    cin >> test_case_amount;
+    while (test_case_amount-- != 0) {
+        cin >> input_siz;
+        preprocess();
+        for (int input_index = 0; input_index < input_siz; ++input_index) {
+            cin >> nums[input_index];
+        }
+        solution();
+    }
+    return 0;
+}
+
+/*
+ *
+2
+6
+3 4 2 6 5 1
+5
+1 2 3 4 5
+ */
+```
+
+</details>  
+
 	입력의 크기를 N이라 할때
 	시간복잡도: O(N^2)
 	공간복잡도: O(N)
@@ -91,6 +363,83 @@ collaborator: [ellyheetov](https://github.com/ellyheetov)
 앞선 4.1번의 문제에서 입력의 크기가 매우 커진 형태이다.  
 따라서 O(N^2)의 속도로는 풀리지 않는다
 해시맵을 사용하여 탐색 단계에서의 속도를 O(1)으로 하여 속도를 빠르게 하였다.  
+
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.4.1.
+ *  INHA_problem_solving 4-2
+ */
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+#include <utility>
+
+using namespace std;
+int test_case_amount, input_siz = 0;
+int answer = 0, temp;
+const int VISITED = -1;
+const int UNDISCOVERED = 1;
+
+vector<int> nums;
+unordered_map<int, int> um;
+
+void print_answer() {
+    cout << answer << '\n';
+}
+
+void solution() {
+    for (int idx = 0; idx < input_siz; ++idx) {
+        if (!um.count(nums[idx] + 1)) {
+            um[nums[idx]] = UNDISCOVERED;
+            answer++;
+            continue;
+        }
+        um[nums[idx]] = VISITED;
+    }
+    print_answer();
+}
+
+void preprocess() {
+    nums.resize(input_siz, 0);
+    answer = 0;
+    um.clear();
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    cin >> test_case_amount;
+    while (test_case_amount-- != 0) {
+        cin >> input_siz;
+        preprocess();
+
+        for (int input_index = 0; input_index < input_siz; ++input_index) {
+            cin >> nums[input_index];
+        }
+        solution();
+    }
+    return 0;
+}
+
+/*
+ *
+2
+6
+3 4 2 6 5 1
+5
+1 2 3 4 5
+ */
+```
+
+</details>  
+
 
 	입력의 크기를 N이라 할때
 	시간복잡도: O(N)
@@ -104,6 +453,90 @@ collaborator: [ellyheetov](https://github.com/ellyheetov)
 
 그래프 사이클 탐색 알고리즘: Hare and tortoises  
 그래프가 주어질때 싸이클을 갖는 서브그래프의 개수는 찾는 문제  
+
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.4.8.
+ *  INHA_problem_solving 5-1
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_map>
+#include <utility>
+#include <climits>
+
+using namespace std;
+
+unordered_map<int, int> um;
+
+const bool VISIT = true;
+const bool UNVISITED = false;
+int input_size;
+int answer = 0;
+
+void solution() {
+    answer = input_size;
+
+    for (int idx = 1; idx <= input_size; ++idx) {
+        vector<bool> visit(input_size + 1, UNVISITED);
+        int cnt = 0;
+        visit[idx] = VISIT;
+        int pre = idx, cur = um[idx];
+        while (true) {
+            if (visit[cur]) {
+                if (idx == cur) {
+                    answer--;
+                    break;
+                }
+                break;
+            }
+            visit[pre] = VISIT;
+            visit[cur] = VISIT;
+            pre = cur;
+            cur = um[pre];
+        }
+    }
+    cout << answer << '\n';
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case, dst;
+    cin >> test_case;
+    while (test_case-- != 0) {
+        cin >> input_size;
+        for (int input_idx = 1; input_idx <= input_size; ++input_idx) {
+            cin >> um[input_idx];
+        }
+        solution();
+    }
+
+    return 0;
+}
+
+/*
+3
+7
+3 1 3 7 3 4 6
+10
+4 10 1 4 6 2 8 9 7 5
+8
+1 2 3 4 5 6 7 8
+ */
+```
+
+</details>  
+
 
 	입력의 크기를 N이라 할때 
 	시간복잡도: O(N^2)
@@ -120,6 +553,134 @@ BFS를 이용한 최단 경로 탐색문제
 최단경로를 찾는 문제이다. 따라서 깊이우선탐색을 이용하면 탈출조건에 따라서  
 필요없는 연산이 많아지므로 너비우선 탐색을 하는것이 논리적으로 간결하다고 생각했다.  
 
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.4.8.
+ *  INHA_problem_solving 5-2
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <utility>
+#include <climits>
+
+using namespace std;
+
+const int UNVISITED = false;
+const int VISITED = true;
+
+vector<int> src(2);
+vector<int> dst(2);
+
+int board_size;
+int answer;
+vector<vector<bool>> visit;
+
+struct Dir {
+    int y, x;
+};
+Dir dir[8] = {
+        {2,  1},
+        {1,  2},
+        {2,  -1},
+        {1,  -2},
+        {-2, 1},
+        {-1, 2},
+        {-2, -1},
+        {-1, -2}
+};
+
+void print_answer() {
+    cout << answer << '\n';
+}
+
+bool is_in_boundary(int &y, int &x) {
+    return y >= 0 && x >= 0 && y < board_size && x < board_size;
+}
+
+void update_visit(int &y, int &x) {
+    visit[y][x] = VISITED;
+}
+
+void bfs() {
+    visit.clear();
+    visit.resize(board_size, vector<bool>(board_size, UNVISITED));
+    answer = INT_MAX;
+
+    queue<vector<int>> q;
+    //y, x, cnt
+    q.push({src[0], src[1], 0});
+    update_visit(src[0], src[1]);
+
+    while (!q.empty()) {
+        int cur_y = q.front()[0];
+        int cur_x = q.front()[1];
+        int cur_cnt = q.front()[2];
+        q.pop();
+        update_visit(cur_y, cur_x);
+
+        if (cur_y == dst[0] && cur_x == dst[1]) {
+            answer = min(answer, cur_cnt);
+        }
+        for (auto &way : dir) {
+            int next_y = cur_y + way.y;
+            int next_x = cur_x + way.x;
+            if (!is_in_boundary(next_y, next_x)) continue;
+            if (visit[next_y][next_x]) continue;
+            update_visit(next_y, next_x);
+            q.push({next_y, next_x, cur_cnt + 1});
+        }
+    }
+}
+
+void solution() {
+
+    bfs();
+    print_answer();
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+    while (test_case-- != 0) {
+        cin >> board_size >> src[0] >> src[1] >> dst[0] >> dst[1];
+        solution();
+    }
+
+    return 0;
+}
+
+/*
+ *
+4
+5
+1 0
+4 4
+8
+0 0
+7 0
+100
+0 0
+30 50
+10
+1 1
+1 1
+ */
+```
+
+</details>  
+
+
 	입력된 장기판(정사각형)의 크기를 N이라고 하면
 	시간복잡도: O(N^2)
 	공간복잡도: O(N^2)
@@ -132,6 +693,97 @@ BFS를 이용한 최단 경로 탐색문제
 
 two pointers  
 주어진 문자열이 숫자, 특수문자를 제외하고 회문인지 확인하는 문제
+
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.4.17.
+ *  INHA_problem_solving 6-1
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <utility>
+#include <climits>
+
+using namespace std;
+
+string target;
+bool isPalandrome = true;
+
+void preprocess() {
+    isPalandrome = true;
+    for (int i = 0; i < target.length(); ++i) {
+        if(isupper(target[i])){
+            target[i] = tolower(target[i]);
+        }
+    }
+}
+
+void print_answer() {
+    if (isPalandrome) {
+        cout << "YES" << '\n';
+        return;
+    }
+    cout << "NO" << '\n';
+}
+
+bool is_alpha(char &it) {
+    return islower(it);
+}
+
+void solution() {
+    preprocess();
+    int left = 0;
+    int right = target.length() - 1;
+
+    while (left < right) {
+        if (!is_alpha(target[left])) {
+            left++;
+            continue;
+        }
+        if (!is_alpha(target[right])) {
+            right--;
+            continue;
+        }
+        if (target[left++] != target[right--]) {
+            isPalandrome = false;
+            break;
+        }
+    }
+    print_answer();
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int test_case = 0;
+    cin >> test_case;
+    while (test_case-- != 0) {
+        cin >> target;
+        solution();
+    }
+
+
+    return 0;
+}
+/*
+4
+Eye!
+Adam
+Inha_University!
+race!car?
+ */
+```
+
+</details>  
+
 
 	입력의 크기를 N이라 할때
 	시간복잡도: O(N)
@@ -154,6 +806,75 @@ BFS와 해시맵을 이용한 최단 경로 탐색문제
 
 Implementation to string division  
 두 수가 정수형의 크기를 넘는 문자열 자료형의 숫자일때 두 수가 배수관계인지 구하는 문제  
+
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.4.22.
+ *  INHA_problem_solving 7-1
+ */
+
+#include <iostream>
+#include <string>
+#include <utility>
+
+using namespace std;
+
+string num1, num2;
+
+void print_result(int &substring) {
+    substring == 0 ? cout << 1 : cout << 0;
+    cout << '\n';
+}
+
+bool is_lager(int &a, int b) {
+    return a >= b;
+}
+
+int get_residue(int &a, string &b) {
+    return a % stoi(b);
+}
+
+void add_next_digit(int &num, int index) {
+    num = num * 10 + (index - '0');
+}
+
+void solution() {
+    int substring = 0;
+    for (char digit : num1) {
+        add_next_digit(substring, digit);
+        if (!is_lager(substring, stoi(num2))) continue;
+        substring = get_residue(substring, num2);
+    }
+    print_result(substring);
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+    while (test_case-- != 0) {
+        cin >> num1 >> num2;
+        solution();
+    }
+    return 0;
+}
+
+/*
+ *
+2
+306580397317560752981 23171
+2852841814435297692 23171
+ */
+```
+
+</details>  
+
 
 	입력된 두 문자열의 길이를 각각 N, M이라 할때
 	시간복잡도: O(max(N, M))
@@ -181,6 +902,99 @@ Implementation to string division
 순열 permutation  
 주어진 배열의 순열 조합을 통해 주어진 범위 안에 있는 경우를 세는 문제  
 
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.4.29.
+ *  INHA_problem_solving 8-1
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <utility>
+#include <cmath>
+#include <climits>
+
+using namespace std;
+
+int input_size, answer;
+vector<int> input;
+vector<int> criteria(3);
+
+void print_result() {
+    cout << answer << '\n';
+}
+
+void resize_input() {
+    answer = 0;
+    input.clear();
+    input.resize(input_size);
+}
+
+int sub_power(int &idx) {
+    return (int) (((long long int) pow(criteria[2], idx) * input[idx]) % (long long int) 1013);
+}
+
+bool is_in_boundary(int &num) {
+    return num >= criteria[0] && num <= criteria[1];
+}
+
+void solution() {
+    sort(input.begin(), input.end());
+    do {
+        int res = 0;
+        for (int idx = 0; idx < input_size; ++idx) {
+            res += sub_power(idx);
+        }
+        res %= 1013;
+        if (!is_in_boundary(res)) continue;
+        answer++;
+    } while (next_permutation(input.begin(), input.end()));
+    print_result();
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+    while (test_case-- != 0) {
+        cin >> input_size;
+        resize_input();
+        for (int index = 0; index < input_size; ++index) {
+            cin >> input[index];
+        }
+        for (int index = 0; index < 3; ++index) {
+            cin >> criteria[index];
+        }
+        solution();
+    }
+
+
+    return 0;
+}
+
+/*
+2
+3
+2 3 4
+50 60 4
+4
+17 5 11 201
+450 670 3
+ */
+```
+
+</details>  
+
+
 	입력된 배열의 길이를 N이라 할때
 	시간복잡도: O(N!)
 	공간복잡도: O(N)
@@ -199,6 +1013,107 @@ Implementation to string division
 우선순위 큐 priority queue  
 주어진 배열 내에서 증가하는 구간을 찾아 값을 누적하는 문제
 
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.5.6.
+ *  INHA_problem_solving 9-1
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <utility>
+#include <climits>
+
+using namespace std;
+
+int input_size, input_boundary;
+vector<int> score;
+vector<pair<int, int>> input;
+int answer, counter = 0;
+
+void resize_input() {
+    answer = 0;
+    counter = 0;
+    score.clear();
+    score.resize(input_size);
+    input.clear();
+    input.resize(input_size);
+}
+
+void print_answer() {
+    cout << answer << "\n";
+}
+
+bool comparator(const pair<int, int> &a, const pair<int, int> &b) {
+    return a.second < b.second;
+}
+
+void solution() {
+    sort(input.begin(), input.end(), comparator);
+    for (int idx = 1; idx < input_size; ++idx) {
+        if(input[idx-1].first > input[idx].first){
+            answer += score[counter];
+            counter = 0;
+            continue;
+        }
+        counter++;
+    }
+    answer += score[counter];
+    print_answer();
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+    while (test_case-- != 0) {
+        cin >> input_size >> input_boundary;
+        resize_input();
+        for (int idx = 0; idx < input_size; ++idx) {
+            cin >> score[idx];
+        }
+        for (int idx = 0; idx < input_size; ++idx) {
+            cin >> input[idx].first >> input[idx].second;
+        }
+        solution();
+    }
+
+
+    return 0;
+}
+
+/*
+2
+5 30
+1 4 8 16 32
+1 1
+30 5
+28 4
+29 3
+15 2
+6 100
+1 2 3 100 200 300
+95 6
+8 1
+98 5
+77 4
+31 3
+2 2
+ */
+```
+
+</details>  
+
+
 	입력된 배열의 길이를 N이라 할때
 	시간복잡도: O(N)
 	공간복잡도: O(1)
@@ -210,6 +1125,85 @@ Implementation to string division
 동적계획법 Dynamic programming  
 cache정보를 이용하여 미리 계산해둔 문자열간의 유사도를 기반으로  
 다음 문자열에 대한 유사도를 구하는 문제이다.
+
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.5.6.
+ *  INHA_problem_solving 9-2
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <utility>
+#include <climits>
+#include <cstring>
+
+using namespace std;
+
+string text1, text2;
+const int TXT1_SIZ = text1.size();
+const int TXT2_SIZ = text2.size();
+vector<vector<int>> cache;
+
+void preprocess() {
+    cache.clear();
+    cache.resize(TXT1_SIZ, vector<int>(TXT2_SIZ, 0));
+}
+
+void print_answer() {
+    cout << cache[0][0] << '\n';
+}
+
+void update_cache(int &row, int &col) {
+    if (text1[row] == text2[col]) {
+        cache[row][col] = cache[row + 1][col + 1] + 1;
+        return;
+    }
+    cache[row][col] = max(cache[row + 1][col], cache[row][col + 1]);
+}
+
+void longestCommonSubsequence() {
+    preprocess();
+    for (int row = TXT1_SIZ - 1; row >= 0; row--) {
+        for (int col = TXT2_SIZ - 1; col >= 0; col--) {
+            update_cache(row, col);
+        }
+    }
+    print_answer();
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+    while (test_case-- != 0) {
+        cin >> text1 >> text2;
+        longestCommonSubsequence();
+    }
+
+    return 0;
+}
+
+/*
+2
+acbabk
+acakbb
+acaykpzzk
+capcakkzz
+ */
+```
+
+</details>  
+
 
 	입력된 두 문자열의 길이를 각각 N, M이라 할때  
 	시간복잡도: O(NM)
@@ -225,6 +1219,101 @@ cache정보를 이용하여 미리 계산해둔 문자열간의 유사도를 기
 탐욕법 greedy algorithm  
 NP-complete 분야에서 매우 유명한 문제중 하나인 knapsack을 변형한 문제  
 
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.5.13.
+ *  INHA_problem_solving 10-1
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <utility>
+#include <climits>
+
+using namespace std;
+
+int input_amount = 0;
+int input_weight = 0;
+int answer = 0;
+vector<vector<int>> items;
+// { amount, weight, value }
+
+void preprocess() {
+    items.clear();
+    items.resize(input_amount, {0, 0, 0});
+    answer = 0;
+}
+
+void find_item_value() {
+    for (int index = 0; index < input_amount; ++index) {
+        items[index][2] = items[index][1] / items[index][0];
+    }
+}
+
+bool cmp(vector<int> &a, vector<int> &b) {
+    return a[2] > b[2];
+}
+
+void print_answer() {
+    cout << answer << '\n';
+}
+
+void solution() {
+    find_item_value();
+    sort(items.begin(), items.end(), cmp);
+
+    for (int index = 0; index < input_amount; ++index) {
+        if (input_weight <= 0) break;
+        const int cnt = input_weight > items[index][0] ? items[index][0] : input_weight;
+        input_weight -= cnt;
+        answer += items[index][2] * cnt;
+    }
+    print_answer();
+}
+
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+    while (test_case-- != 0) {
+        cin >> input_amount >> input_weight;
+        preprocess();
+        for (int input = 0; input < input_amount; ++input) {
+            cin >> items[input][0];
+        }
+        for (int input = 0; input < input_amount; ++input) {
+            cin >> items[input][1];
+        }
+        solution();
+    }
+
+    return 0;
+}
+
+/*
+2
+7 95
+36 14 48 32 61 43 29
+36 56 240 320 61 43 290
+6 73
+26 71 6 37 12 15
+234 639 54 111 96 150
+ */
+```
+
+</details>  
+
+
 	입력된 내용중 물건의 종류를 T라고 할때
 	시간복잡도: O(T logT)
 	공간복잡도: O(1)
@@ -236,6 +1325,88 @@ NP-complete 분야에서 매우 유명한 문제중 하나인 knapsack을 변형
 동적계획법 Dynamic programming  
 NP-complete 분야에서 매우 유명한 문제중 하나인 knapsack을 변형한 문제  
 cache정보를 이용하여 미리 계산해둔 값을 기반으로 다음 값을 추적한다  
+
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.5.13.
+ *  INHA_problem_solving 10-2
+ */
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int input_amount, input_weight;
+vector<pair<int, int>> items;
+vector<int> cache;
+
+void resize_input() {
+    items.clear();
+    items.resize(input_amount, {0, 0});
+    cache.clear();
+    cache.resize(input_weight + 1, 0);
+}
+
+void update_cache(int left, int right) {
+    cache[right] = max(cache[right], cache[right - items[left].first] + items[left].second);
+}
+
+void print_answer() {
+    cout << cache[input_weight] << '\n';
+}
+
+void solution() {
+    for (int left = 0; left < input_amount; left++) {
+        for (int right = input_weight; right >= 1; right--) {
+            if (items[left].first > right) continue;
+            update_cache(left, right);
+        }
+    }
+    print_answer();
+}
+
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int test_case;
+    cin >> test_case;
+
+    while (test_case-- != 0) {
+        cin >> input_amount >> input_weight;
+        resize_input();
+        for (int i = 0; i < input_amount; i++) {
+            cin >> items[i].first;
+        }
+        for (int i = 0; i < input_amount; i++) {
+            cin >> items[i].second;
+        }
+
+        solution();
+    }
+
+    return 0;
+}
+
+/*
+2
+4 7
+6 4 3 5
+13 8 6 12
+5 11
+7 2 8 9 3
+6 8 12 4 9
+ */
+```
+
+</details>  
+
 
 	입력된 내용중 물건의 종류를 T, 무게의 최대치를 W라고 할때
 	시간복잡도: O(TW)
