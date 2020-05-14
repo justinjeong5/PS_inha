@@ -7,19 +7,25 @@ problem solving Inha Univ. 2020 spring
 최소편집거리 알고리즘 (minimum edit distance algorithm)  
 주어진 문자열의 최소편집거리의 합을 구하고, 모든 문자열의 편집거리가 최소인 문자열을 구하는 문제  
 
-* <a href="https://leetcode.com/problems/sliding-window-median/">Leetcode - 480. Sliding Window Median (유사문제)</a>  
-* <a href="https://www.acmicpc.net/problem/1572">백준 - 1572. 중앙값 (유사문제)</a> 
+	입력된 두 문자열의 길이를 각각 N, M이라고 할때
+	시간복잡도: O(NM)
+	공간복잡도: O(NM)
 
-
+* <a href="https://leetcode.com/problems/edit-distance/">Leetcode - 72. Edit Distance  (유사문제)</a>  
+* <a href="https://www.acmicpc.net/problem/3449">백준 - 3449. 해밍 거리 (유사문제)</a>  
+* <a href="https://www.acmicpc.net/problem/7620">백준 - 7620. 편집 거리 (유사문제)</a>  
   
 ### 1.2 과소비 알림 서비스
 
 슬라이딩 윈도우 알고리즘 (sliding window)  
-슬라이딩 윈도우 방식을 이용하여 k개의 연속된 구간에서의 중간값을 구하는 문제
+슬라이딩 윈도우 방식을 이용하여 k개의 연속된 구간에서의 중간값을 구하는 문제  
 
-* <a href="https://leetcode.com/problems/edit-distance/">Leetcode - 72. Edit Distance  (유사문제)</a>  
-* <a href="https://www.acmicpc.net/problem/3449">백준 - 3449. 해밍 거리 (유사문제)</a>  
-* <a href="https://www.acmicpc.net/problem/7620">백준 - 7620. 편집 거리 (유사문제)</a>   
+	입력된 배열의 길이를 N, 슬라이딩 윈도우의 크기를 K라고 할떄  
+	시간복잡도: O(N logK)
+	공간복잡도: O(K)
+ 
+ * <a href="https://leetcode.com/problems/sliding-window-median/">Leetcode - 480. Sliding Window Median (유사문제)</a>  
+* <a href="https://www.acmicpc.net/problem/1572">백준 - 1572. 중앙값 (유사문제)</a> 
 
 ## <2주차>
 ### 2.1 오류정정(solved)
@@ -27,10 +33,13 @@ problem solving Inha Univ. 2020 spring
 최소편집거리 알고리즘 (minimum edit distance algorithm)  
 주어진 문자열의 최소편집거리를 이용하여, 원래 문자열이 무엇이었는지 알아내는 문제  
 
+	입력된 문자열의 개수를 T, 문자열의 길이를 N이라고 할때
+	시간복잡도: O(TN)
+	공간복잡도: O(N)
+
 * <a href="https://leetcode.com/problems/edit-distance/">Leetcode - 72. Edit Distance  (유사문제)</a>  
 * <a href="https://www.acmicpc.net/problem/3449">백준 - 3449. 해밍 거리 (유사문제)</a>  
 * <a href="https://www.acmicpc.net/problem/7620">백준 - 7620. 편집 거리 (유사문제)</a>  
-
 
 ### 2.2 오목  
 
@@ -194,7 +203,7 @@ Implement for string division
 
 * <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">Leetcode - 121. Best Time to Buy and Sell Stock (유사문제)</a>  
 
-### 9.2 Longest Common Subsequence(solved)
+### 9.2 Longest Common Subsequence
 
 동적계획법 Dynamic programming  
 cache정보를 이용하여 미리 계산해둔 문자열간의 유사도를 기반으로  
