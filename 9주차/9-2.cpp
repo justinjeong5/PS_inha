@@ -15,13 +15,17 @@
 using namespace std;
 
 string text1, text2;
-const int TXT1_SIZ = text1.size();
-const int TXT2_SIZ = text2.size();
+int TXT1_SIZ;
+int TXT2_SIZ;
+
 vector<vector<int>> cache;
 
 void preprocess() {
+    TXT1_SIZ = text1.size();
+    TXT2_SIZ = text2.size();
+
     cache.clear();
-    cache.resize(TXT1_SIZ, vector<int>(TXT2_SIZ, 0));
+    cache.resize(TXT1_SIZ + 1, vector<int>(TXT2_SIZ + 1, 0));
 }
 
 void print_answer() {

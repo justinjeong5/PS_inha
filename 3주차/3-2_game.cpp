@@ -16,6 +16,7 @@ vector<pair<string, pair<int, int>>> board;
 // board = {name, {start, end}};
 int input_length = 0;
 int answer = 0;
+int cur;
 
 void resize_input() {
     answer = 1;
@@ -23,14 +24,12 @@ void resize_input() {
 }
 
 bool cmp(pair<string, pair<int, int>> &a, pair<string, pair<int, int>> &b) {
-    if (a.second.second < b.second.second) return true;
-    else if (a.second.second > b.second.second) return false;
-    else if (a.second.second == b.second.second) {
+    if (a.second.second == b.second.second)
         return a.second.first < b.second.first;
-    }
+    return a.second.second < b.second.second;
 }
 
-void update_answer(int cur, int index){
+void update_answer(int index) {
     if (cur > board[index].second.first) return;
     cur = board[index].second.second;
     answer++;
@@ -43,9 +42,9 @@ void print_answer() {
 void solution() {
     sort(board.begin(), board.end(), cmp);
 
-    int cur = board[0].second.second;
+    cur = board[0].second.second;
     for (int index = 1; index < input_length; ++index) {
-        update_answer(cur, index);
+        update_answer(index);
     }
     print_answer();
 }
@@ -74,7 +73,7 @@ int main() {
 11
 item1 5 7
  item2 8 12
- item3 0 6
+item3 0 6
  item4 1 4
  item5 6 10
  item6 5 9

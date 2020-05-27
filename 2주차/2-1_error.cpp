@@ -24,7 +24,7 @@ void resize_input(int amount_origin){
 
 void print_letter(int target_idx) {
     char ans = 'A' + target_idx;
-    cout << ans << '\n';
+    cout << ans;
 }
 
 void update_distance(int distance, int pattern){
@@ -54,6 +54,7 @@ void solution() {
         }
         print_letter(target_idx);
     }
+    cout << '\n';
 }
 
 int main() {
@@ -71,6 +72,7 @@ int main() {
         }
         cin >> length_problem >> target;
         solution();
+
     }
     return 0;
 }
