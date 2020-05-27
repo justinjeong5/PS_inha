@@ -1419,9 +1419,9 @@ int main() {
 
 ### 11.1 [구슬의 작용과 반작용](https://github.com/justinjeong5/PS_inha/blob/master/11%EC%A3%BC%EC%B0%A8/prob-W10_New1.pdf) (solved)
 
-sorting 정렬 알고리즘
-어려워 보이지만 문제를 모델링 해보면 간단한 정렬 문제이다.
-정렬의 기준은 현재의 위치를 기준으로 계속 진행했을때 떨어지는데 걸리는 시간으로 한다.
+sorting 정렬 알고리즘  
+어려워 보이지만 문제를 모델링 해보면 간단한 정렬 문제이다.  
+정렬의 기준은 현재의 위치를 기준으로 계속 진행했을때 떨어지는데 걸리는 시간으로 한다.  
 
 <details>
     <summary>클릭하여 코드보기</summary>
