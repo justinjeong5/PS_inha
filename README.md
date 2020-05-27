@@ -300,7 +300,7 @@ using namespace std;
 int test_case_amount, input_siz = 0;
 int answer = 0;
 
-vector<int> nums;
+vector<int> input;
 
 void print_answer() {
     cout << answer << '\n';
@@ -308,9 +308,9 @@ void print_answer() {
 
 void solution() {
     for (int out = 0; out < input_siz; ++out) {
-        int target = nums[out];
+        int target = input[out];
         for (int in = out + 1; in < input_siz; ++in) {
-            if (target != nums[in] + 1) continue;
+            if (target != input[in] + 1) continue;
             target--;
         }
         answer++;
@@ -319,7 +319,7 @@ void solution() {
 }
 
 void preprocess() {
-    nums.resize(input_siz, 0);
+    input.resize(input_siz, 0);
     answer = 0;
 }
 
@@ -333,7 +333,7 @@ int main() {
         cin >> input_siz;
         preprocess();
         for (int input_index = 0; input_index < input_siz; ++input_index) {
-            cin >> nums[input_index];
+            cin >> input[input_index];
         }
         solution();
     }
@@ -385,7 +385,7 @@ int answer = 0, temp;
 const int VISITED = -1;
 const int UNDISCOVERED = 1;
 
-vector<int> nums;
+vector<int> input;
 unordered_map<int, int> um;
 
 void print_answer() {
@@ -394,18 +394,18 @@ void print_answer() {
 
 void solution() {
     for (int idx = 0; idx < input_siz; ++idx) {
-        if (!um.count(nums[idx] + 1)) {
-            um[nums[idx]] = UNDISCOVERED;
+        if (!um.count(input[idx] + 1)) {
+            um[input[idx]] = UNDISCOVERED;
             answer++;
             continue;
         }
-        um[nums[idx]] = VISITED;
+        um[input[idx]] = VISITED;
     }
     print_answer();
 }
 
 void preprocess() {
-    nums.resize(input_siz, 0);
+    input.resize(input_siz, 0);
     answer = 0;
     um.clear();
 }
@@ -421,7 +421,7 @@ int main() {
         preprocess();
 
         for (int input_index = 0; input_index < input_siz; ++input_index) {
-            cin >> nums[input_index];
+            cin >> input[input_index];
         }
         solution();
     }
@@ -1287,7 +1287,7 @@ int main() {
     cin >> test_case;
     while (test_case-- != 0) {
         cin >> input_amount >> input_weight;
-        preprocess();
+        input_resize();
         for (int input = 0; input < input_amount; ++input) {
             cin >> items[input][0];
         }
@@ -1413,5 +1413,101 @@ int main() {
 	공간복잡도: O(W)
 	
 * [백준 - 12865. 평범한 배낭 (동일문제)](https://www.acmicpc.net/problem/12865)
+
+
+## <11주차>
+
+### 11.1 [구슬의 작용과 반작용](https://github.com/justinjeong5/PS_inha/blob/master/11%EC%A3%BC%EC%B0%A8/prob-W10_New1.pdf) (solved)
+
+sorting 정렬 알고리즘
+어려워 보이지만 문제를 모델링 해보면 간단한 정렬 문제이다.
+정렬의 기준은 현재의 위치를 기준으로 계속 진행했을때 떨어지는데 걸리는 시간으로 한다.
+
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.5.27.
+ *  INHA_problem_solving 11-1
+ */
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <utility>
+
+using namespace std;
+
+int input_amount, input_length, target;
+vector<vector<int>> input;
+//입력받은 시간, 떨어지는데 걸리는 시간
+
+void input_resize() {
+    input.clear();
+    input.resize(input_amount, {0, 0});
+}
+
+void getDropTime() {
+    for (int index = 0; index < input_amount; ++index) {
+        if (input[index][0] > 0) {
+            input[index][1] = input_length - input[index][0];
+            continue;
+        }
+        input[index][1] = -input[index][0];
+    }
+}
+
+bool cmp(vector<int> &a, vector<int> &b) {
+    return a[1] < b[1];
+}
+
+void sorting() {
+    sort(input.begin(), input.end(), cmp);
+}
+
+void print_answer() {
+    cout << input[target - 1][1] << '\n';
+}
+
+void solution() {
+    getDropTime();
+    sorting();
+    print_answer();
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+
+    while (test_case-- != 0) {
+        cin >> input_amount >> input_length >> target;
+        input_resize();
+        for (int index = 0; index < input_amount; ++index) {
+            cin >> input[index][0];
+        }
+        solution();
+    }
+    return 0;
+}
+
+/*
+ 2
+ 7 40 4
+ 3 -30 14 -7 -21 33 24
+ 6 30 5
+ 5 -9 11 13 -18 25
+ */
+```
+
+</details>  
+
+	입력된 구슬의 개수를 N이라고 할때
+	시간복잡도: O(N logN)
+	공간복잡도: O(1)
 
 -EOF-
