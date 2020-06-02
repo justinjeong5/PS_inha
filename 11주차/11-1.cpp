@@ -19,7 +19,7 @@ void input_resize() {
     input.resize(input_amount, {0, 0});
 }
 
-void getDropTime() {
+void get_drop_time() {
     for (int index = 0; index < input_amount; ++index) {
         if (input[index][0] > 0) {
             input[index][1] = input_length - input[index][0];
@@ -42,7 +42,7 @@ void print_answer() {
 }
 
 void solution() {
-    getDropTime();
+    get_drop_time();
     sorting();
     print_answer();
 }

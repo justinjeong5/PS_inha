@@ -1441,14 +1441,14 @@ using namespace std;
 
 int input_amount, input_length, target;
 vector<vector<int>> input;
-//입력받은 시간, 떨어지는데 걸리는 시간
+//입력받은 시작 위치, 떨어지는데 걸리는 시간
 
 void input_resize() {
     input.clear();
     input.resize(input_amount, {0, 0});
 }
 
-void getDropTime() {
+void get_drop_time() {
     for (int index = 0; index < input_amount; ++index) {
         if (input[index][0] > 0) {
             input[index][1] = input_length - input[index][0];
@@ -1471,7 +1471,7 @@ void print_answer() {
 }
 
 void solution() {
-    getDropTime();
+    get_drop_time();
     sorting();
     print_answer();
 }
@@ -1502,12 +1502,15 @@ int main() {
  6 30 5
  5 -9 11 13 -18 25
  */
+
 ```
 
 </details>  
 
 	입력된 구슬의 개수를 N이라고 할때
 	시간복잡도: O(N logN)
-	공간복잡도: O(1)
+	공간복잡도: O(N)
 
+* [직접 찍은 해설 영상 - 구슬의 작용반작용](https://youtu.be/0NV54JYmFI8)  
+  
 -EOF-
