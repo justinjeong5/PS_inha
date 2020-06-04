@@ -12,76 +12,37 @@
 
 using namespace std;
 
-string text, pattern;
-unordered_map<char, int> um_p;
-unordered_map<char, int> um_t;
-
-void preprocess_text() {
-    um_t.clear();
-    for (auto it  : text) {
-        if (!um_t.count(it)) um_t[it] = 0;
-        um_t[it]++;
+string minWindow(string s, string t) {
+    unordered_map<char, int> um;
+    for (auto it : t) {
+        if (!um.count(it)) um[it] = 0;
+        um[it]++;
     }
-}
 
-void preprocess_pattern() {
-    um_p.clear();
-    for (auto it : pattern) {
-        if (!um_p.count(it)) um_p[it] = 0;
-        um_p[it]++;
-    }
-}
+    int start = 0, end = 0;
+    int count = um.size(), len = INT_MAX;
+    int ans_start = 0;
 
-bool find_character(char &it) {
-    if (um_p.count(it)) {
-        if (--um_p[it] == -1) {
-            um_p.erase(it);
-        }
-        return true;
-    }
-    return false;
-}
+    while (end < s.length()) {
 
-bool is_possible() {
-    for (auto it : pattern) {
-        if (!um_t.count(it)) return false;
-    }
-    return true;
-}
-
-void solution() {
-    preprocess_text();
-    preprocess_pattern();
-
-    if (!is_possible()) {
-        cout << 0 << '\n';
-        return;
-    }
-    
-    int answer = INT_MAX;
-    int left = 0, right = 0;
-    int count = 1, cur_length;
-    while (left != (int) text.length()) {
-        preprocess_pattern();
-        if (!find_character(text[left])) {
-            left++;
-            right++;
-            continue;
+        char end_char = s[end++];
+        if (um.count(end_char)) {
+            if (--um[end_char] == 0) count--;
         }
 
-        count = (int) pattern.length();
-        cur_length = 0;
-        while (count != 0 && right != (int) text.length()) {
-            if (find_character(text[right])) count--;
-            right++;
-            cur_length++;
-        }
-        answer = min(answer, cur_length);
-        left++;
-        right = left;
+        while (count == 0) {
+            if (len > end - start) {
+                len = end - start;
+                ans_start = start;
+            }
 
+            char start_char = s[start++];
+            if (um.count(start_char)) {
+                if (++um[start_char] > 0) count++;
+            }
+        }
     }
-    cout << answer << '\n';
+    return len == INT_MAX ? "" : s.substr(ans_start, len);
 }
 
 int main() {
@@ -92,14 +53,15 @@ int main() {
     int test_case;
     cin >> test_case;
     for (int test = 0; test < test_case; ++test) {
+        string text, pattern;
         cin >> text >> pattern;
-        solution();
+        cout << minWindow(text, pattern).length() << '\n';
     }
     return 0;
 }
 
 /*
- 4
+4
 INHACODEBANC
 ABC
 MERRYCHRIsTMAS
@@ -109,7 +71,7 @@ Magic
 cacAba
 Aaab
 
- 13
+13
 INHACODEBANC
 ABC
 MERRYCHRIsTMAS
