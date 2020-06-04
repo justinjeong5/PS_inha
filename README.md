@@ -1622,4 +1622,225 @@ int main() {
 
 * [직접 찍은 해설 영상 - 구슬의 작용반작용](https://youtu.be/0NV54JYmFI8)  
   
+
+
+## <12주차>
+
+### 12.1 [가까운 카드쌍 찾기](https://github.com/justinjeong5/PS_inha/blob/master/12%EC%A3%BC%EC%B0%A8/prob-W11_N.pdf) (solved)
+
+priority queue 우선순위큐
+거리가 가까운 카드의 쌍을 규칙에 따라 출력하는 문제
+
+
+<details>
+    <summary>클릭하여 코드보기</summary>
+
+```c++
+/*
+ *  2020.6.3.
+ *  INHA_problem_solving 12-1
+ */
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <utility>
+#include <climits>
+
+using namespace std;
+
+const int UNVISITED = 0;
+const int VISIT = 1;
+
+int board_size, input_amount;
+vector<vector<int>> board;
+// { 카드번호, x축, y축 }
+vector<int> visit;
+
+struct TwoCards;
+vector<TwoCards> result;
+
+int get_distance(vector<int> &a, vector<int> &b);
+
+struct TwoCards {
+    int distance;
+    char number;
+    vector<int> card1;
+    vector<int> card2;
+
+    TwoCards(vector<int> &a, vector<int> &b) {
+        distance = get_distance(a, b);
+        number = a[0];
+        if (a[2] == b[2]) {
+            if (a[1] < b[1]) {
+                card1 = a;
+                card2 = b;
+            } else {
+                card1 = b;
+                card2 = a;
+            }
+        } else if (a[2] < b[2]) {
+            card1 = a;
+            card2 = b;
+        } else {
+            card1 = b;
+            card2 = a;
+        }
+    }
+
+    TwoCards() {
+        distance = 2000000;
+        number = 'Z';
+        card1 = {0, 0, 0};
+        card2 = {0, 1000, 1000};
+    }
+};
+
+void input_resize() {
+    board.clear();
+    board.resize(input_amount, vector<int>(3));
+    visit.clear();
+    visit.resize(input_amount, UNVISITED);
+    result.clear();
+}
+
+bool is_already_visit(int &index) {
+    return visit[index] == VISIT;
+}
+
+void update_visit(int &a, int &b) {
+    visit[a] = VISIT;
+    visit[b] = VISIT;
+}
+
+int get_distance(vector<int> &a, vector<int> &b) {
+    const int temp_x = a[1] - b[1];
+    const int temp_y = a[2] - b[2];
+    return temp_x * temp_x + temp_y * temp_y;
+}
+
+int is_same_number(int &left, int &right) {
+    return board[left][0] == board[right][0];
+}
+
+bool is_closer(TwoCards &cur, TwoCards &next) {
+    if (cur.distance != next.distance) return cur.distance > next.distance;
+    if (cur.card2[2] == next.card2[2]) return cur.card2[1] > next.card2[1];
+    return cur.card2[2] > next.card2[2];
+}
+
+bool cmp_input(vector<int> &a, vector<int> &b) {
+    vector<int> origin = {0, 0, 0};
+    int a_dist = get_distance(origin, a);
+    int b_dist = get_distance(origin, b);
+
+    if (a_dist == b_dist) return a[2] < b[2];
+    return a_dist < b_dist;
+}
+
+bool cmp_res(TwoCards &a, TwoCards &b) {
+    if ((a.card1[2] + a.card2[2]) == (b.card1[2] + b.card2[2]))
+        return (a.card1[1] + a.card2[1]) < (b.card1[1] + b.card2[1]);
+    return (a.card1[2] + a.card2[2]) < (b.card1[2] + b.card2[2]);
+}
+
+bool cmp_res2(TwoCards &a, TwoCards &b) {
+    return a.number < b.number;
+}
+
+void print_result(TwoCards &cur) {
+    cout << static_cast<char>(cur.number + 'A') << " " << cur.card1[1] << " " << cur.card1[2]
+         << " " << cur.card2[1] << " " << cur.card2[2] << '\n';
+}
+
+void print_answer() {
+    sort(result.begin(), result.end(), cmp_res);
+    sort(result.begin(), result.end(), cmp_res2);
+    for (auto it : result) {
+        print_result(it);
+    }
+}
+
+void solution() {
+    sort(board.begin(), board.end(), cmp_input);
+    int repeat = input_amount / 2;
+
+    while (repeat-- != 0) {
+        auto *cur = new TwoCards();
+        int left_index = 0, right_index = 0;
+        for (int left = 0; left < input_amount - 1; ++left) {
+            if (is_already_visit(left)) continue;
+
+            for (int right = left + 1; right < input_amount; ++right) {
+                if (is_already_visit(right)) continue;
+                if (!is_same_number(left, right)) continue;
+                auto *next = new TwoCards(board[left], board[right]);
+                if (!is_closer(*cur, *next)) continue;
+
+                left_index = left;
+                right_index = right;
+                cur = next;
+            }
+        }
+        update_visit(left_index, right_index);
+        result.push_back(*cur);
+    }
+    print_answer();
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+    while (test_case-- != 0) {
+        cin >> board_size >> input_amount;
+        input_resize();
+        for (int index = 0; index < input_amount; ++index) {
+            char temp;
+            cin >> temp >> board[index][1] >> board[index][2];
+            board[index][0] = temp - 'A';
+        }
+        solution();
+    }
+    return 0;
+}
+
+/*
+3
+6 8
+A 3 1
+B 1 4
+B 1 5
+A 3 3
+A 2 2
+B 5 4
+A 1 1
+B 2 4
+2 4
+A 0 0
+A 1 1
+A 1 0
+A 0 1
+6 6
+A 3 1
+B 1 4
+B 4 4
+A 5 2
+B 5 4
+B 4 5
+
+```
+
+</details>  
+
+	입력된 카드의 개수를 N이라고 할때
+	시간복잡도: O(N^2)
+	공간복잡도: O(N)
+
+  
 -EOF-
