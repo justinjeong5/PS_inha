@@ -1620,7 +1620,7 @@ int main() {
 	시간복잡도: O(N logN)
 	공간복잡도: O(N)
 
-* [직접 찍은 해설 영상 - 구슬의 작용반작용](https://youtu.be/0NV54JYmFI8)  
+* [직접 찍은 해설 영상 - 구슬의 작용반작용](https://youtu.be/FRl5jKBWe_Y)  
   
 
 
