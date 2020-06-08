@@ -1757,8 +1757,9 @@ int main() {
 
 ### 12.1 [가까운 카드쌍 찾기](https://github.com/justinjeong5/PS_inha/blob/master/12%EC%A3%BC%EC%B0%A8/prob-W11_N.pdf) (solved)
 
-priority queue 우선순위큐
-거리가 가까운 카드의 쌍을 규칙에 따라 출력하는 문제
+greedy algorithm 그리디 알고리즘  
+bruth force 완전 탐색  
+거리가 가까운 카드의 쌍을 규칙에 따라 출력하는 문제  
 
 
 <details>
@@ -1968,8 +1969,9 @@ B 4 5
 </details>  
 
 	입력된 카드의 개수를 N이라고 할때
-	시간복잡도: O(N^2)
+	시간복잡도: O(N^3)
 	공간복잡도: O(N)
 
+* [직접 찍은 해설 영상 - 가까운 카드 쌍 찾기](https://youtu.be/4r9054zK1n0)  
   
 -EOF-
