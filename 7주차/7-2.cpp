@@ -1,60 +1,99 @@
 /*
- *  2020.4.22.
+ *  2020.6.17.
  *  INHA_problem_solving 7-2
  */
-
 #include <iostream>
-#include <string>
 #include <vector>
-#include <queue>
+#include <stack>
+#include <deque>
+#include <string>
 #include <algorithm>
 #include <utility>
-#include <climits>
 
 using namespace std;
 
-vector<int> grid;
-int input_amount, test_amount;
-int result = 0;
+int input_amount, input_length;
+bool result;
+vector<vector<int>> input;
 
-void resize_grid() {
-    grid.clear();
-    grid.resize(input_amount + 1, 0);
-    result = 0;
+void preprocess() {
+    input.clear();
+    input.resize(input_amount, vector<int>(input_length + 1));
 }
 
-void print_result() {
-    cout << result << " ";
+char int_to_char(int &a) {
+    return (char) ('0' + a);
 }
 
-void print_interval() {
-    cout << '\n';
+int char_to_int(char &a) {
+    return (int) (a - '0');
 }
 
-bool no_more_step(int &val, int &cnt) {
-    return result == 1 || cnt > input_amount || val > grid[input_amount];
-}
+int eval(deque<char> temp) {
+    stack<int> s;
+    s.push(temp.front());
+    temp.pop_front();
 
-void depthFirstSearch(int &current_value, int &current_count) {
-    if (no_more_step(current_value, current_count)) return;
+    while (!temp.empty()) {
+        char operation = temp.front();
+        temp.pop_front();
 
-    if (current_value == grid[input_amount] && current_count == input_amount) {
-        result = 1;
-        return;
+        if (operation == '+') {
+            s.push(char_to_int(temp.front()));
+        }
+
+        if (operation == '*') {
+            int top_from_stack = s.top();
+            s.pop();
+            top_from_stack *= char_to_int(temp.front());
+            s.push(top_from_stack);
+        }
+        temp.pop_front();
     }
 
-    int next_cnt = current_count + 1;
-    int next_val = current_value + grid[current_count];
-    depthFirstSearch(next_val, next_cnt);
+    int sum = 0;
+    while (!s.empty()) {
+        sum += s.top();
+        s.pop();
+    }
+    return sum;
+}
 
-    next_val = current_value * grid[current_count];
-    depthFirstSearch(next_val, next_cnt);
+void dfs(deque<char> &expression, int idx1, int idx2) {
+    if (result) return;
+    if (idx2 == input_length) {
+        if (eval(expression) == input[idx1][idx2 + 1]) {
+            result = true;
+        }
+        return;
+    }
+    expression.push_back(int_to_char(input[idx1][idx2]));
+    expression.push_back('+');
+    dfs(expression, idx1, idx2 + 1);
+    expression.pop_back();
+    expression.push_back('*');
+    dfs(expression, idx1, idx2 + 1);
+}
 
+void print_answer() {
+    cout << result << ' ';
 }
 
 void solution() {
-    int val = grid[0], cnt = 1;
-    depthFirstSearch(val, cnt);
+    for (int index = 0; index < input_amount; ++index) {
+        result = false;
+        deque<char> expression;
+
+        expression.push_back(int_to_char(input[index][0]));
+        expression.push_back('+');
+        dfs(expression, index, 0);
+        expression.pop_back();
+        expression.push_back('*');
+        dfs(expression, index, 0);
+
+        print_answer();
+    }
+    cout << '\n';
 }
 
 int main() {
@@ -65,19 +104,15 @@ int main() {
     int test_case;
     cin >> test_case;
     while (test_case-- != 0) {
-        cin >> test_amount >> input_amount;
-        for (int test = 0; test < test_amount; ++test) {
-            resize_grid();
-            for (int input = 0; input < input_amount + 1; ++input) {
-                cin >> grid[input];
+        cin >> input_amount >> input_length;
+        preprocess();
+        for (int index = 0; index < input_amount; ++index) {
+            for (int idx = 0; idx < input_length + 1; ++idx) {
+                cin >> input[index][idx];
             }
-            solution();
-            print_result();
         }
-        print_interval();
+        solution();
     }
-
-
     return 0;
 }
 
@@ -90,7 +125,6 @@ int main() {
 2 4 6 8 384
 1 2 8 2 2356
 3 2
-1 1 2
 3 8 95
 2 9 18
  */

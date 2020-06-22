@@ -19,12 +19,55 @@ const int VISIT = 1;
 int board_size, input_amount;
 vector<vector<int>> board;
 // { 카드번호, x축, y축 }
+
 vector<int> visit;
 
 struct TwoCards;
 vector<TwoCards> result;
+//  카드쌍을 저장하여 정렬하는 공
+
+void input_resize();
+
+bool is_already_visit(int &index);
+
+void update_visit(int &a, int &b);
 
 int get_distance(vector<int> &a, vector<int> &b);
+
+int is_same_number(int &left, int &right);
+
+bool is_closer(TwoCards &cur, TwoCards &next);
+
+bool cmp_input(vector<int> &a, vector<int> &b);
+
+bool cmp_res(TwoCards &a, TwoCards &b);
+
+bool cmp_res2(TwoCards &a, TwoCards &b);
+
+void print_answer();
+
+void solution();
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int test_case;
+    cin >> test_case;
+    while (test_case-- != 0) {
+        cin >> board_size >> input_amount;
+        input_resize();
+        for (int index = 0; index < input_amount; ++index) {
+            char temp;
+            cin >> temp >> board[index][1] >> board[index][2];
+            board[index][0] = temp - 'A';
+        }
+        solution();
+    }
+    return 0;
+}
+
 
 struct TwoCards {
     int distance;
@@ -102,6 +145,11 @@ bool cmp_input(vector<int> &a, vector<int> &b) {
     return a_dist < b_dist;
 }
 
+void print_result(TwoCards &cur) {
+    cout << static_cast<char>(cur.number + 'A') << " " << cur.card1[1] << " " << cur.card1[2]
+         << " " << cur.card2[1] << " " << cur.card2[2] << '\n';
+}
+
 bool cmp_res(TwoCards &a, TwoCards &b) {
     if ((a.card1[2] + a.card2[2]) == (b.card1[2] + b.card2[2]))
         return (a.card1[1] + a.card2[1]) < (b.card1[1] + b.card2[1]);
@@ -110,11 +158,6 @@ bool cmp_res(TwoCards &a, TwoCards &b) {
 
 bool cmp_res2(TwoCards &a, TwoCards &b) {
     return a.number < b.number;
-}
-
-void print_result(TwoCards &cur) {
-    cout << static_cast<char>(cur.number + 'A') << " " << cur.card1[1] << " " << cur.card1[2]
-         << " " << cur.card2[1] << " " << cur.card2[2] << '\n';
 }
 
 void print_answer() {
@@ -150,26 +193,6 @@ void solution() {
         result.push_back(*cur);
     }
     print_answer();
-}
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    int test_case;
-    cin >> test_case;
-    while (test_case-- != 0) {
-        cin >> board_size >> input_amount;
-        input_resize();
-        for (int index = 0; index < input_amount; ++index) {
-            char temp;
-            cin >> temp >> board[index][1] >> board[index][2];
-            board[index][0] = temp - 'A';
-        }
-        solution();
-    }
-    return 0;
 }
 
 /*

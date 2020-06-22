@@ -1,44 +1,61 @@
 /*
- *  2020.3.18.
- *  INHA_problem_solving 1-2
+ *  2020.6.15.
+ *  INHA_problem_solving 1-2.cpp
  */
 
 #include <iostream>
+#include <string>
 #include <vector>
+#include <queue>
+#include <algorithm>
+#include <utility>
+#include <climits>
 
 using namespace std;
 
-vector<double> expense;
-int input_length, day_length;
+int input_amount, input_window;
+vector<int> input;
+int answer;
 
-double find_median(int index) {
-    if (day_length % 2 == 1) return expense[index - (day_length / 2 + 1)];
-    return (expense[index - day_length / 2] + expense[index - (day_length / 2 - 1)]) / 2;
+void resize_input() {
+    answer = 0;
+    input.clear();
+    input.resize(input_amount, 0);
 }
 
-
-bool over_expense(int index) {
-    double target = find_median(index) * 2;
-    return target <= expense[index];
-}
-
-
-void solution() {
-    int answer = 0;
-    for (int day = day_length; day < input_length; ++day) {
-        if (over_expense(day)) answer++;
-    }
+void print_answer() {
     cout << answer << '\n';
 }
 
-/*
- *
-2
-9 5
-2 3 4 2 3 6 8 4 5
-5 4
-1 2 3 4 4
- */
+double find_medium(vector<int> sub_array) {
+    sort(sub_array.begin(), sub_array.end());
+    if (sub_array.size() % 2) {
+        return sub_array[(int) (sub_array.size() / 2)];
+    }
+    return (double) (sub_array[sub_array.size() / 2 - 1] + sub_array[sub_array.size() / 2]) / 2;
+}
+
+vector<int> sub_vector(int left, int right) {
+    vector<int> res(right - left);
+    int cnt = 0;
+    for (int i = left; i < right; ++i) {
+        res[cnt++] = input[i];
+    }
+    return res;
+}
+
+void solution() {
+    int left = 0, right = 0;
+
+    while (right++ < input_amount) {
+        while (left + input_window <= right && right < input_amount) {
+            double res = find_medium(sub_vector(left, right));
+            if (res * 2 <= input[right]) answer++;
+            left++, right++;
+        }
+    }
+    print_answer();
+}
 
 int main() {
     ios::sync_with_stdio(false);
@@ -47,15 +64,26 @@ int main() {
 
     int test_case;
     cin >> test_case;
-    for (int test = 0; test < test_case; ++test) {
-        cin >> input_length >> day_length;
-        expense.resize(input_length);
-        for (int input = 0; input < input_length; ++input) {
-            int data;
-            cin >> data;
-            expense[input] = data;
+    while (test_case-- != 0) {
+        cin >> input_amount >> input_window;
+        resize_input();
+        for (int idx = 0; idx < input_amount; ++idx) {
+            cin >> input[idx];
         }
         solution();
     }
     return 0;
 }
+
+/*
+ *
+input
+2
+9 5
+2 3 4 2 3 6 8 4 5
+5 4
+1 2 3 4 4
+output
+2
+0
+ */

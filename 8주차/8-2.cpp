@@ -17,7 +17,7 @@ int input_size, answer;
 vector<pair<int, int>> input;
 
 void resize_input() {
-    answer = 0;
+    answer = 0;∑
     input.clear();
     input.resize(input_size);
 }

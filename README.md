@@ -1,10 +1,10 @@
 # PS_inha
-Problem Solving Inha Univ. 2020 spring  
+Problem Solving Inha Univ. 2020 spring 
 
 collaborator: [ellyheetov](https://github.com/ellyheetov)  
 
 ## <1주차>
-### 1.1  [DNA 대표서열](https://github.com/justinjeong5/PS_inha/blob/master/1%EC%A3%BC%EC%B0%A8/prob-DNA1-1.pdf)(solved)
+### 1.1  [DNA 대표서열](https://github.com/justinjeong5/PS_inha/blob/master/1%EC%A3%BC%EC%B0%A8/prob-DNA1-1.pdf)(solved) 
 
 최소편집거리 알고리즘 (minimum edit distance algorithm)  
 주어진 문자열의 최소편집거리의 합을 구하고, 모든 문자열의 편집거리가 최소인 문자열을 구하는 문제  
@@ -159,7 +159,7 @@ AAGTTACCAA
 * [백준 - 1572. 중앙값 (유사문제)](https://www.acmicpc.net/problem/1572)
 
 ## <2주차>
-### 2.1 [오류정정](https://github.com/justinjeong5/PS_inha/blob/master/2%EC%A3%BC%EC%B0%A8/prob-Error.pdf)(solved)
+### 2.1 [오류정정](https://github.com/justinjeong5/PS_inha/blob/master/2%EC%A3%BC%EC%B0%A8/prob-Error.pdf)(solved)☆
 
 최소편집거리 알고리즘 (minimum edit distance algorithm)  
 주어진 문자열의 최소편집거리를 이용하여, 원래 문자열이 무엇이었는지 알아내는 문제  
@@ -278,7 +278,7 @@ int main() {
 * [백준 - 2615. 오목 (유사문제)](https://www.acmicpc.net/problem/2615)
 
 ## <3주차>
-### 3.1 [게임개발계획](https://github.com/justinjeong5/PS_inha/blob/master/3%EC%A3%BC%EC%B0%A8/prob-Game.pdf)(solved)
+### 3.1 [게임개발계획](https://github.com/justinjeong5/PS_inha/blob/master/3%EC%A3%BC%EC%B0%A8/prob-Game.pdf)(solved)☆
 
 그리디 알고리즘 (Greedy algorithm)  
 그리디 알고리즘의 대표문제로 유명한 회의실 배정문제와 상당히 유사한 문제  
@@ -390,7 +390,7 @@ apple 47 49
 
 * [백준 - 1931. 회의실 (동일문제)](https://www.acmicpc.net/problem/1931)
 
-### 3.2 [최소문자열 탐색](https://github.com/justinjeong5/PS_inha/blob/master/3%EC%A3%BC%EC%B0%A8/prob-String.pdf)(solved)
+### 3.2 [최소문자열 탐색](https://github.com/justinjeong5/PS_inha/blob/master/3%EC%A3%BC%EC%B0%A8/prob-String.pdf)(solved)☆
 
 슬라이딩 윈도우 알고리즘 (sliding window)  
 슬라이딩 윈도우 방식을 이용하여 최소 길이 부분 문자열을 구하는 문제  
@@ -596,7 +596,7 @@ int main() {
 
 * [프로그래머스 - 42891. 무지의 먹방 라이브 (유사문제)](https://programmers.co.kr/learn/courses/30/lessons/42891)
 
-### 4.2 [움직이는 하노이탑](https://github.com/justinjeong5/PS_inha/blob/master/4%EC%A3%BC%EC%B0%A8/prob-W3_P2.pdf)(solved)
+### 4.2 [움직이는 하노이탑](https://github.com/justinjeong5/PS_inha/blob/master/4%EC%A3%BC%EC%B0%A8/prob-W3_P2.pdf)(solved)☆
 
 앞선 4.1번의 문제에서 입력의 크기가 매우 커진 형태이다.  
 따라서 O(N^2)의 속도로는 풀리지 않는다
@@ -1135,7 +1135,7 @@ int main() {
 
 ## <8주차>
 
-### 8.1 [수열 조합하기](https://github.com/justinjeong5/PS_inha/blob/master/8%EC%A3%BC%EC%B0%A8/prob-W7_P1.pdf)(solved)
+### 8.1 [수열 조합하기](https://github.com/justinjeong5/PS_inha/blob/master/8%EC%A3%BC%EC%B0%A8/prob-W7_P1.pdf)(solved)☆
 
 순열 permutation  
 주어진 배열의 순열 조합을 통해 주어진 범위 안에 있는 경우를 세는 문제  
@@ -1358,7 +1358,7 @@ int main() {
 
 * [Leetcode - 121. Best Time to Buy and Sell Stock (유사문제)](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 
-### 9.2 [LCS](https://github.com/justinjeong5/PS_inha/blob/master/9%EC%A3%BC%EC%B0%A8/prob-Week8_P2.pdf) (solved)
+### 9.2 [LCS](https://github.com/justinjeong5/PS_inha/blob/master/9%EC%A3%BC%EC%B0%A8/prob-Week8_P2.pdf) (solved)☆
 
 동적계획법 Dynamic programming  
 cache정보를 이용하여 미리 계산해둔 문자열간의 유사도를 기반으로  
